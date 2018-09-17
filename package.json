@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NDOE_ENV=production webpack --config build/webpack.config.client.js",
+    "build:client": "cross-env NDOE_ENV=production webpack --config build/webpack.config.client.js",
+    "build": "npm run clean && npm run build:client",
+    "clean": "rimraf dist",
     "dev": "cross-env NDOE_ENV=development webpack-dev-server --config build/webpack.config.client.js"
   },
   "keywords": [],
@@ -27,6 +29,7 @@
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.2",
     "postcss-loader": "^2.1.5",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "stylus": "^0.54.5",

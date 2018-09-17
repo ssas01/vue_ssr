@@ -1,6 +1,7 @@
 const path = require('path')
+const createVueLoaderOptions = require('./vue-loader.config')
+const isDev = process.env.NODE_ENV === "development"
 const config = {
-    target: "web",
     mode: 'production',
     entry: path.join(__dirname, '../client/index.js'),
     output: {
@@ -13,12 +14,7 @@ const config = {
                 test: /\.vue$/,
                 exclude: /node_modules/,  
                 loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        scss: 'vue-style-loader!css-loader!sass-loader'
-                    },
-                    extractCSS: true
-                }
+                options: createVueLoaderOptions(isDev)
             },{
                 test: /\.jsx$/,
                 exclude: /node_modules/,  
