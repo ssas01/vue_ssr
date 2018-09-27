@@ -1,19 +1,21 @@
 <template>
     <div id="app">
         <Header></Header>
-        <Todo></Todo>
+        <router-link to='/login/foo'>to login foo page.</router-link>
+        <br/>
+        <router-link to='/login/bar'>to login bar page.</router-link>
+        <router-view></router-view>
         <Footer></Footer>
     </div>
 </template>
 <script>
     import Header from "./layout/header.vue"
     import Footer from "./layout/footer.jsx"
-    import Todo from "./views/todo/todo.vue"
+    
     export default {
         components: {
             Header,
-            Footer,
-            Todo
+            Footer
         }
     }
 </script>

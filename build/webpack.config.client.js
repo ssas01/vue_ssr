@@ -15,12 +15,14 @@ const defaultPlugins = [
         }
     }),
     new VueLoaderPlugin(),
-    new HTMLPlugin()
+    new HTMLPlugin({
+        template: path.join(__dirname, '../client/index.html')
+    })
 ]
 let config;
-
 if (isDev) {
     config = merge(baseConfig, {
+        mode: 'development',
         module: {
             rules: [
                 {
@@ -52,13 +54,19 @@ if (isDev) {
         devtool: "#cheap-module-eval-source-map",
         devServer: {
             host: '0.0.0.0',
-            port: 8080,
+            port: 8000,
             overlay: {
                 errors: true
             },
+            historyApiFallback: true,
             hot: true,
             inline: true
         },
+        // resolve: {
+        //     alias: {
+        //         'vue': path.join(__dirname, "../node_modules/vue/dist/vue.esm.js")
+        //     }
+        // },
         plugins: defaultPlugins.concat([
             new webpack.HotModuleReplacementPlugin(),
             new webpack.NoEmitOnErrorsPlugin(),
@@ -70,6 +78,7 @@ if (isDev) {
     })
 } else {
     config = merge(baseConfig,{
+        mode: 'production',
         entry: {
             app: path.join(__dirname, '../client/index.js'),
             vendor: ['vue']
